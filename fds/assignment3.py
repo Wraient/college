@@ -43,10 +43,9 @@ word_counts = {}  # Create an empty dictionary to store word counts
   # Split the text into words (case-insensitive)
 for word in string.lower().split():
     # Remove non-alphanumeric characters
-    clean_word = ''.join(c for c in word if c.isalnum())
-    if clean_word:  # Check if there's any word left after cleaning
-        if clean_word in word_counts:
-            word_counts[clean_word] += 1
+    if word:  # Check if there's any word left after cleaning
+        if word in word_counts:
+            word_counts[word] += 1
         else:
-            word_counts[clean_word] = 1
+            word_counts[word] = 1
 print(word_counts)
