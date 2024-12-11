@@ -54,7 +54,7 @@ word_counts = {}  # Create an empty dictionary to store word counts
   # Split the text into words (case-insensitive)
 for word in string.lower().split():
     # Remove non-alphanumeric characters
-    if word:  # Check if there's any word left after cleaning
+    if word:  
         if word in word_counts:
             word_counts[word] += 1
         else:
