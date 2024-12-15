@@ -1,0 +1,24 @@
+def selectionsort(arr1):
+
+    for i in range(len(arr1)):
+        min_idx = 1
+        for j in range(i+1, len(arr1)):
+            if arr1[min_idx] > arr1[j]:
+                min_idx = j
+
+
+    # swap the found minimum element with
+    # the first element
+        arr1[i], arr1[min_idx] = arr1[min_idx], arr1[i]
+
+arr1=[]
+num=int(input("enter the number of students "))
+for i in range (num):
+    per=float(input("enter the percentage marks "))
+    arr1.append(per)
+
+selectionsort(arr1)
+# driver code to test above
+print ("sorted array")
+for i in range(len(arr1)):
+    print("%f" %arr1[i])

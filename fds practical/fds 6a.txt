@@ -1,0 +1,41 @@
+# Function to perform Insertion Sort on the array of percentages
+def insertion_sort(arr):
+    # Traverse through 1 to len(arr)
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        
+        # Move elements of arr[0..i-1], that are greater than key,
+        # to one position ahead of their current position
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        
+        # Place key after the element smaller than it
+        arr[j + 1] = key
+
+# Main function
+def main():
+    # Number of students
+    num_students = int(input("Enter the number of students: "))
+    
+    # Array to store percentage of each student
+    percentages = []
+    
+    # Input percentages of students
+    print("Enter the percentages of the students:")
+    for i in range(num_students):
+        percentage = float(input(f"Student {i+1} percentage: "))
+        percentages.append(percentage)
+    
+    # Sorting the array using Insertion Sort
+    insertion_sort(percentages)
+    
+    # Display the sorted array
+    print("\nSorted percentages (in ascending order):")
+    for i, percentage in enumerate(percentages, start=1):
+        print(f"Student {i}: {percentage:.2f}%")
+
+# Call the main function to execute the program
+if __name__ == "__main__":
+    main()

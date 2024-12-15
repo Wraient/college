@@ -1,0 +1,106 @@
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+// Node structure for doubly linked list
+struct Node {
+    int bit;       // To store the binary digit (0 or 1)
+    Node* next;    // Pointer to the next node
+    Node* prev;    // Pointer to the previous node
+};
+
+// Function to create a new node with given bit value
+Node* createNode(int bit) {
+    Node* newNode = new Node;
+    newNode->bit = bit;
+    newNode->next = nullptr;
+    newNode->prev = nullptr;
+    return newNode;
+}
+
+// Function to input binary number and store it in a doubly linked list
+Node* inputBinaryNumber() {
+    string binary;
+    cout << "Enter a binary number: ";
+    cin >> binary;
+
+    Node* head = nullptr;
+    Node* tail = nullptr;
+
+    for (char c : binary) {
+        int bit = c - '0';  // Convert char to integer (0 or 1)
+        Node* newNode = createNode(bit);
+
+        if (!head) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+    }
+
+    return head;
+}
+
+// Function to print the binary number stored in the doubly linked list
+void printBinaryNumber(Node* head) {
+    Node* temp = head;
+    while (temp) {
+        cout << temp->bit;
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+// Function to compute the 1's complement of the binary number
+Node* computeOnesComplement(Node* head) {
+    Node* temp = head;
+    while (temp) {
+        temp->bit = (temp->bit == 0) ? 1 : 0;  // Flip the bits
+        temp = temp->next;
+    }
+    return head;
+}
+
+// Function to compute the 2's complement of the binary number
+Node* computeTwosComplement(Node* head) {
+    // Compute 1's complement first
+    head = computeOnesComplement(head);
+
+    // Add 1 to the least significant bit
+    Node* temp = head;
+    while (temp) {
+        if (temp->bit == 0) {
+            temp->bit = 1;  // Set the first 0 to 1
+            return head;
+        } else {
+            temp->bit = 0;  // Set 1 to 0
+        }
+        temp = temp->next;
+    }
+    return head;  // If the number was all 1's, now it becomes 0 with an additional 1 at the end
+}
+
+// Main function to test the program
+int main() {
+    // Input binary number
+    Node* binaryNumber = inputBinaryNumber();
+
+    // Display the original binary number
+    cout << "Original Binary Number: ";
+    printBinaryNumber(binaryNumber);
+
+    // Compute and display the 1's complement
+    Node* onesComplement = computeOnesComplement(binaryNumber);
+    cout << "1's Complement: ";
+    printBinaryNumber(onesComplement);
+
+    // Compute and display the 2's complement
+    Node* twosComplement = computeTwosComplement(binaryNumber);
+    cout << "2's Complement: ";
+    printBinaryNumber(twosComplement);
+
+    return 0;
+}

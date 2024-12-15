@@ -1,0 +1,44 @@
+# Function to perform Shell Sort on the array of percentages
+def shell_sort(arr):
+    n = len(arr)
+    gap = n // 2  # Initial gap size
+
+    # Keep reducing the gap size until it becomes 0
+    while gap > 0:
+        # Perform a gapped insertion sort for this gap size
+        for i in range(gap, n):
+            temp = arr[i]
+            j = i
+            while j >= gap and arr[j - gap] > temp:
+                arr[j] = arr[j - gap]
+                j -= gap
+            arr[j] = temp
+
+        gap //= 2  # Reduce the gap size
+
+# Main function
+def main():
+    # Number of students
+    num_students = int(input("Enter the number of students: "))
+    
+    # Array to store percentage of each student
+    percentages = []
+    
+    # Input percentages of students
+    print("Enter the percentages of the students:")
+    for i in range(num_students):
+        percentage = float(input(f"Student {i + 1} percentage: "))
+        percentages.append(percentage)
+    
+    # Sorting the array using Shell Sort
+    shell_sort(percentages)
+    
+    # Display the top 5 scores (or fewer if there are less than 5 students)
+    print("\nTop 5 scores (in descending order):")
+    top_five = percentages[-5:][::-1]  # Take last 5 elements and reverse them to get descending order
+    for i, score in enumerate(top_five, start=1):
+        print(f"Top {i}: {score:.2f}%")
+
+# Call the main function to execute the program
+if __name__ == "__main__":
+    main()

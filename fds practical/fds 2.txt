@@ -1,0 +1,25 @@
+def process_transactions(transactions):
+    balance = 0
+    for transaction in transactions:
+        action = transaction[0]
+        amount = int(transaction[1:])
+
+        if action == 'D':
+            balance += amount
+        elif action == 'W':
+            if balance - amount >= 0:
+                balance -= amount
+            else:
+                print(f"Cannot withdraw {amount} as it would make the balance negative.")
+        else:
+            print(f"Invalid transaction type: {action}")
+
+    return balance
+
+
+# Input transactions
+transactions = ["D300", "D300", "W200", "D100"]
+
+# Process transactions and print the resulting balance
+final_balance = process_transactions(transactions)
+print(f"Final balance: {final_balance}")

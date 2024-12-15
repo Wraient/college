@@ -1,0 +1,47 @@
+string = input("Enter the string: ")
+
+# Longest word in string
+string_list = string.split()
+longest = 0
+index = 0
+for i in range(len(string_list)):
+    if len(string_list[i]) > longest:
+        longest = len(string_list[i])
+        index = i
+
+print(f"Longest word in the string is: {string_list[index]}")
+
+# count the occurence of any character
+a=input("Enter the character you want to count the occurence of: ")
+print("The character",a,"appears",string.count(a),"times")
+
+#Check palindrome
+string2 = input("Enter the string: (for palindrome check) ")
+
+if string2[::-1] == string2:
+    print("String is a palindrome")
+else:
+    print("String is not a palindrome")
+
+#Substring to search
+print("Enter the substring you want to search for: ")
+sub_string = input()
+
+index = string.find(sub_string)
+if index==-1:
+    print("No substring found")
+else:
+    print(f"Index of substring in string is at: {string.find(sub_string)}")
+
+# Word Count
+word_counts = {}  # Create an empty dictionary to store word counts
+  # Split the text into words (case-insensitive)
+for word in string.lower().split():
+    # Remove non-alphanumeric characters
+    clean_word = ''.join(c for c in word if c.isalnum())
+    if clean_word:  # Check if there's any word left after cleaning
+        if clean_word in word_counts:
+            word_counts[clean_word] += 1
+        else:
+            word_counts[clean_word] = 1
+print(word_counts)
